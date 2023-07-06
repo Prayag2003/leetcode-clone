@@ -1,0 +1,34 @@
+import { authModelAtom } from "@/atoms/authModelAtoms";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { useSetRecoilState } from "recoil";
+
+type NavbarProps = {};
+
+const Navbar: React.FC<NavbarProps> = () => {
+  const setAuthModelState = useSetRecoilState(authModelAtom);
+  const handleClick = () => {
+    setAuthModelState((prevState) => ({
+      ...prevState,
+      isOpen: !prevState.isOpen,
+    }));
+  };
+  return (
+    <div className="flex items-center justify-between sm:px-12 px-2 md:px-24 display:inline">
+      <Link href="/" className="flex items-center justify-center h-20">
+        <Image src="/logo-full.png" alt="logo" height={160} width={130} />
+      </Link>
+      <div className="flex items-center">
+        <button
+          className="text-white px-2 py-1.5 sm:px-4 rounded-md border:2 
+          border-white  text-sm font-medium hover:bg-purple hover:text-brand-orange hover:border-3 hover:border-brand-orange border-2 border-transparent transiton duration 300 ease-in-out"
+          onClick={handleClick}
+        >
+          Sign In
+        </button>
+      </div>
+    </div>
+  );
+};
+export default Navbar;
